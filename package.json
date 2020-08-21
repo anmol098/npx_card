@@ -1,0 +1,22 @@
+{
+  "name": "anmol",
+  "version": "1.0.6",
+  "description": "",
+  "main": "card.js",
+  "bin": {
+    "anmol": "./card.js"
+  },
+  "scripts": {
+    "test": "node card.js"
+  },
+  "dependencies": {
+    "boxen": "^4.2.0",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "inquirer": "^7.3.2",
+    "open": "^7.0.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
