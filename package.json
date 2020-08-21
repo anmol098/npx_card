@@ -7,7 +7,8 @@
     "anmol": "./card.js"
   },
   "scripts": {
-    "test": "node card.js"
+    "test": "node card.js",
+    "pub": "npm version patch & npm publish"
   },
   "dependencies": {
     "boxen": "^4.2.0",
