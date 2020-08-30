@@ -11,7 +11,8 @@ And get to know me in unique style.
 
 The final output might look something like this:
 
-![image](https://user-images.githubusercontent.com/15426564/91656194-724f7e00-ead4-11ea-9b71-a0f890c02fae.png)
+![image](https://user-images.githubusercontent.com/15426564/91656824-92357080-ead9-11ea-9486-36e567ecca88.png)
+
 
 <hr/>
 
