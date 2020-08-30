@@ -7,18 +7,19 @@ npx anmol
 ```
 And get to know me in unique style.
 
-###SCREENSHOT
+
+### SCREENSHOT
 
 The final output might look something like this:
 
-![image](https://user-images.githubusercontent.com/15426564/91656824-92357080-ead9-11ea-9486-36e567ecca88.png)
+![image](https://github.com/anmol098/npx_card/blob/master/demo.gif)
 
 
 <hr/>
 
-#####STEPS TO CREATE YOUR OWN
+##### STEPS TO CREATE YOUR OWN
 
-####npm init
+#### npm init
 
 Start a new `node` project and name it whatever you want. You could choose to name it after the executable you want to expose. It’s not necessary but conventions are nice, and it makes your binary more `npx` friendly.
 
@@ -43,7 +44,7 @@ console.log('doing business')
 Be creative and add logic to create your own card in `card.js` file.
 or you can simply copy my `card.js` file and make necessary changes as required
 
-####ship it
+#### ship it
 
 That’s an entirely functional first release! You just need to modify your `package.json` to let `npm` know to link your executable and you are off:
 
