@@ -19,7 +19,6 @@
     "open": "^7.0.4",
     "ora": "^5.1.0",
     "request": "^2.88.2",
-    "terminal-link": "^2.1.1"
   },
   "keywords": [
     "NPM_CARD",
@@ -27,7 +26,4 @@
   ],
   "author": "Anmol Singh",
   "license": "ISC",
-  "devDependencies": {
-    "request": "^2.88.2"
-  }
 }
