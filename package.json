@@ -18,6 +18,9 @@
     "open": "^7.0.4"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Anmol Singh",
+  "license": "ISC",
+  "devDependencies": {
+    "request": "^2.88.2"
+  }
 }

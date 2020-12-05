@@ -7,6 +7,9 @@ const chalk = require("chalk");
 const inquirer = require("inquirer");
 const clear = require("clear");
 const open = require("open");
+const fs = require('fs');
+const request = require('request');
+const path = require('path');
 
 clear();
 
@@ -23,6 +26,18 @@ const questions = [
                 value: () => {
                     open("mailto:hi@anmolsingh.me");
                     console.log("\nDone, see you soon at inbox.\n");
+                }
+            },
+            {
+                name: `Download my ${chalk.magentaBright.bold("Resume")}?`,
+                value: () => {
+                    let pipe = request('https://anmolsingh.me/api/resume').pipe(fs.createWriteStream('./anmol-resume.html'));
+                    pipe.on("finish", function () {
+                        let downloadPath = path.join(process.cwd(), 'anmol-resume.html')
+                        console.log(`\nResume Downloaded at ${downloadPath} \n`);
+                        open("./anmol-resume.html")
+
+                    });
                 }
             },
             {
