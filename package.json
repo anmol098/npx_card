@@ -1,6 +1,6 @@
 {
   "name": "anmol",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "card.js",
   "bin": {
@@ -18,7 +18,10 @@
     "open": "^7.0.4",
     "request": "^2.88.2"
   },
-  "keywords": ["NPM_CARD","NPX_CARD"],
+  "keywords": [
+    "NPM_CARD",
+    "NPX_CARD"
+  ],
   "author": "Anmol Singh",
   "license": "ISC",
   "devDependencies": {
