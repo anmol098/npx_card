@@ -10,7 +10,8 @@ const open = require("open");
 const fs = require('fs');
 const request = require('request');
 const path = require('path');
-
+const ora = require('ora');
+const cliSpinners = require('cli-spinners');
 clear();
 
 const prompt = inquirer.createPromptModule();
@@ -31,12 +32,17 @@ const questions = [
             {
                 name: `Download my ${chalk.magentaBright.bold("Resume")}?`,
                 value: () => {
+                    // cliSpinners.dots;
+                    const loader = ora({
+                        text: ' Downloading Resume',
+                        spinner: cliSpinners.material,
+                    }).start();
                     let pipe = request('https://anmolsingh.me/api/resume').pipe(fs.createWriteStream('./anmol-resume.html'));
                     pipe.on("finish", function () {
                         let downloadPath = path.join(process.cwd(), 'anmol-resume.html')
                         console.log(`\nResume Downloaded at ${downloadPath} \n`);
-                        open("./anmol-resume.html")
-
+                        open(downloadPath)
+                        loader.stop();
                     });
                 }
             },
@@ -111,6 +117,5 @@ const tip = [
     '',
 ].join("\n");
 console.log(tip);
-
 
 prompt(questions).then(answer => answer.action());
