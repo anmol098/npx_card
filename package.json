@@ -1,10 +1,14 @@
 {
   "name": "anmol",
   "version": "2.1.0",
-  "description": "",
+  "description": "A personal card for Anmol Pratap Singh (@anmol098)",
   "main": "card.js",
   "bin": {
     "anmol": "./card.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmol098/npx_card.git"
   },
   "scripts": {
     "test": "node card.js",
@@ -21,9 +25,13 @@
     "request": "^2.88.2"
   },
   "keywords": [
-    "NPM_CARD",
-    "NPX_CARD"
+    "card",
+    "npm",
+    "npm card",
+    "npx",
+    "npx card",
+    "business card"
   ],
-  "author": "Anmol Singh",
+  "author": "Anmol Singh <hi@anmolsingh.me> (https://anmolsingh.me/)",
   "license": "ISC"
 }
