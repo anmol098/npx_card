@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "node card.js",
-    "pub": "npm version patch & npm publish"
+    "pub": "npm version major & npm publish"
   },
   "dependencies": {
     "boxen": "^4.2.0",
