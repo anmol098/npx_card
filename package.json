@@ -15,9 +15,10 @@
     "chalk": "^4.1.0",
     "clear": "^0.1.0",
     "inquirer": "^7.3.2",
-    "open": "^7.0.4"
+    "open": "^7.0.4",
+    "request": "^2.88.2"
   },
-  "keywords": [],
+  "keywords": ["NPM_CARD","NPX_CARD"],
   "author": "Anmol Singh",
   "license": "ISC",
   "devDependencies": {
