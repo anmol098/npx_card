@@ -47,6 +47,13 @@ const questions = [
                 }
             },
             {
+                name: `Schedule a ${chalk.redBright.bold("Meeting")}?`,
+                value: () => {
+                    open('https://calendly.com/anmol098/30min');
+                    console.log("\n See you at the meeting \n");
+                }
+            },
+            {
                 name: "Just quit.",
                 value: () => {
                     console.log("Hasta la vista.\n");
@@ -59,9 +66,9 @@ const questions = [
 const data = {
     name: chalk.bold.green("             Anmol Pratap Singh"),
     handle: chalk.white("@anmol098"),
-    work: `${chalk.white("Software Engineer at")} ${chalk
+    work: `${chalk.white("Lead Software Engineer at")} ${chalk
         .hex("#2b82b2")
-        .bold("ClearTax")}`,
+        .bold("FootLoose Labs")}`,
     twitter: chalk.gray("https://twitter.com/") + chalk.cyan("misteranmol"),
     github: chalk.gray("https://github.com/") + chalk.green("anmol098"),
     linkedin: chalk.gray("https://linkedin.com/in/") + chalk.blue("anmol098"),
