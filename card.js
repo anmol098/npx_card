@@ -12,7 +12,21 @@ const request = require('request');
 const path = require('path');
 const ora = require('ora');
 const cliSpinners = require('cli-spinners');
+const terminalLink = require('terminal-link');
 clear();
+
+// Wraps `text` in an OSC 8 hyperlink pointing at `url` so it becomes clickable
+// in terminals that support hyperlinks (iTerm2, Windows Terminal, VS Code,
+// GNOME Terminal, Hyper, etc.). On unsupported terminals it falls back to the
+// plain text unchanged, where cmd/ctrl + click on the URL still works.
+const link = (text, url) => terminalLink(text, url, { fallback: false });
+
+const links = {
+    twitter: "https://twitter.com/misteranmol",
+    github: "https://github.com/anmol098",
+    linkedin: "https://linkedin.com/in/anmol098",
+    web: "https://anmolsingh.me"
+};
 
 const prompt = inquirer.createPromptModule();
 
@@ -69,10 +83,10 @@ const data = {
     work: `${chalk.white("Lead Software Engineer at")} ${chalk
         .hex("#2b82b2")
         .bold("FootLoose Labs")}`,
-    twitter: chalk.gray("https://twitter.com/") + chalk.cyan("misteranmol"),
-    github: chalk.gray("https://github.com/") + chalk.green("anmol098"),
-    linkedin: chalk.gray("https://linkedin.com/in/") + chalk.blue("anmol098"),
-    web: chalk.cyan("https://anmolsingh.me"),
+    twitter: link(chalk.gray("https://twitter.com/") + chalk.cyan("misteranmol"), links.twitter),
+    github: link(chalk.gray("https://github.com/") + chalk.green("anmol098"), links.github),
+    linkedin: link(chalk.gray("https://linkedin.com/in/") + chalk.blue("anmol098"), links.linkedin),
+    web: link(chalk.cyan("https://anmolsingh.me"), links.web),
     npx: chalk.red("npx") + " " + chalk.white("anmol"),
 
     labelWork: chalk.white.bold("       Work:"),
@@ -118,9 +132,9 @@ const me = boxen(
 
 console.log(me);
 const tip = [
-    `Tip: Try ${chalk.cyanBright.bold(
+    `Tip: The links above are clickable, try ${chalk.cyanBright.bold(
         "cmd/ctrl + click"
-    )} on the links above`,
+    )} on them`,
     '',
 ].join("\n");
 console.log(tip);
