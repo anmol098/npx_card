@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "node card.js",
-    "pub": "npm version major & npm publish"
+    "pub": "npm version major && npm publish"
   },
   "dependencies": {
     "boxen": "^4.2.0",
@@ -22,7 +22,8 @@
     "inquirer": "^7.3.2",
     "open": "^7.0.4",
     "ora": "^5.1.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "terminal-link": "^2.1.1"
   },
   "keywords": [
     "card",

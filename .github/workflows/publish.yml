@@ -1,0 +1,85 @@
+name: Publish to npm
+
+# Publishes a new version of the `anmol` package to npm.
+#
+# Run it manually from the Actions tab ("Run workflow"), pick the version bump,
+# and the workflow will:
+#   1. bump the version in package.json / package-lock.json,
+#   2. commit that bump and tag it (vX.Y.Z), push both back to the branch,
+#   3. publish the package to npm with provenance.
+#
+# Requires an `NPM_TOKEN` repository secret (an npm "Automation" access token
+# for an account that can publish the `anmol` package).
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump to apply before publishing"
+        type: choice
+        required: true
+        default: major
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write   # push the version commit and tag
+  id-token: write   # npm provenance
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Use the workflow token so the version commit/tag can be pushed back.
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sanity check
+        # `npm test` launches the interactive card, which would hang in CI,
+        # so just make sure the entry point parses and loads its dependencies.
+        run: node --check card.js
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        id: bump
+        run: |
+          npm version "${{ inputs.bump }}" -m "chore(release): v%s"
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push version commit and tag
+        # Push only after a successful publish so a failed publish doesn't
+        # leave a dangling version bump on the branch.
+        run: git push --follow-tags origin HEAD:${{ github.ref_name }}
+
+      - name: Summary
+        run: |
+          echo "Published \`anmol@${{ steps.bump.outputs.version }}\` to npm 🎉" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "https://www.npmjs.com/package/anmol/v/${{ steps.bump.outputs.version }}" >> "$GITHUB_STEP_SUMMARY"
