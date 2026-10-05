@@ -51,13 +51,24 @@ const questions = [
                         text: ' Downloading Resume',
                         spinner: cliSpinners.material,
                     }).start();
-                    let pipe = request('https://anmolsingh.me/api/resume').pipe(fs.createWriteStream('./anmol-resume.html'));
-                    pipe.on("finish", function () {
-                        let downloadPath = path.join(process.cwd(), 'anmol-resume.html')
-                        console.log(`\nResume Downloaded at ${downloadPath} \n`);
-                        open(downloadPath)
-                        loader.stop();
-                    });
+                    const downloadPath = path.join(process.cwd(), 'anmol-resume.pdf');
+                    request('https://anmolsingh.me/api/resume-pdf')
+                        .on('response', function (response) {
+                            if (response.statusCode !== 200) {
+                                loader.stop();
+                                console.log(`\nCould not download resume (HTTP ${response.statusCode}). Try again later.\n`);
+                                return;
+                            }
+                            response.pipe(fs.createWriteStream(downloadPath)).on('finish', function () {
+                                loader.stop();
+                                console.log(`\nResume Downloaded at ${downloadPath} \n`);
+                                open(downloadPath);
+                            });
+                        })
+                        .on('error', function () {
+                            loader.stop();
+                            console.log('\nCould not download resume. Check your connection and try again.\n');
+                        });
                 }
             },
             {
